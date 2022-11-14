@@ -17,7 +17,7 @@ resource "aws_instance" "instance" {
   associate_public_ip_address = var.associate_public_ip_address
   key_name                    = var.ssh_key_name
   tags = {
-    Name        = "${var.basename}${format("%02g", each.key)}"
+    Name        = "${var.basename}-${format("%02g", each.key)}"
     Terraform   = "true"
     Environment = var.environment
   }
