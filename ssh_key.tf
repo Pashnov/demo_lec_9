@@ -4,7 +4,7 @@ resource "tls_private_key" "ec2_key" {
 }
 resource "aws_key_pair" "key_pair" {
   key_name   = "demo_key"
-  public_key = "${tls_private_key.ec2_key.public_key_openssh}"
+  public_key = tls_private_key.ec2_key.public_key_openssh
   
   provisioner "local-exec" { 
     command = "mkdir key"

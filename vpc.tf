@@ -40,11 +40,6 @@ resource "aws_route_table_association" "subnet-a" {
   subnet_id      = aws_subnet.subnet-a.id
 }
 
-resource "aws_route_table_association" "private-rt-ass-b" {
-  subnet_id      = aws_subnet.private-subnet-b.id
-  route_table_id = aws_route_table.private-nat-gt.id
-}
-
 resource "aws_route_table_association" "private-rt-ass-a" {
   subnet_id      = aws_subnet.private-subnet-a.id
   route_table_id = aws_route_table.private-nat-gt.id
@@ -53,19 +48,8 @@ resource "aws_route_table_association" "private-rt-ass-a" {
 resource "aws_subnet" "subnet-a" {
   vpc_id                  = aws_vpc.vpc.id
   availability_zone       = "${var.region}a"
-  cidr_block              = cidrsubnet(aws_vpc.vpc.cidr_block, 2, 0)
+  cidr_block              = cidrsubnet(aws_vpc.vpc.cidr_block, 1, 0)
   map_public_ip_on_launch = true
-  lifecycle {
-    ignore_changes = [tags]
-  }
-}
-
-resource "aws_subnet" "private-subnet-b" {
-  vpc_id                          = aws_vpc.vpc.id
-  availability_zone               = "${var.region}b"
-  cidr_block                      = cidrsubnet(aws_vpc.vpc.cidr_block, 2, 2)
-  map_public_ip_on_launch         = false
-  assign_ipv6_address_on_creation = false
   lifecycle {
     ignore_changes = [tags]
   }
@@ -75,7 +59,7 @@ resource "aws_subnet" "private-subnet-b" {
 resource "aws_subnet" "private-subnet-a" {
   vpc_id                          = aws_vpc.vpc.id
   availability_zone               = "${var.region}a"
-  cidr_block                      = cidrsubnet(aws_vpc.vpc.cidr_block, 2, 3)
+  cidr_block                      = cidrsubnet(aws_vpc.vpc.cidr_block, 1, 1)
   map_public_ip_on_launch         = false
   assign_ipv6_address_on_creation = false
   lifecycle {

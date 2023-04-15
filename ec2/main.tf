@@ -21,4 +21,5 @@ resource "aws_instance" "instance" {
     Terraform   = "true"
     Environment = var.environment
   }
+  user_data = data.template_file.user_data.rendered
 }

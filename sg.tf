@@ -11,7 +11,7 @@ resource "aws_security_group" "main_sg" {
     from_port   = 0
     protocol    = "-1"
     to_port     = 0
-    cidr_blocks = ["${var.vpc-cidr}"]
+    cidr_blocks = [var.vpc-cidr]
   }
   egress {
     from_port   = 0

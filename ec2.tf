@@ -8,6 +8,7 @@ module "ec2" {
   subnet_id          = aws_subnet.private-subnet-a.id
   ssh_key_name       = aws_key_pair.key_pair.key_name
   instance_type      = "t3.micro"
+  instance_count     = (["1", "2"])
 }
 
 module "ec2_public" {
@@ -21,5 +22,5 @@ module "ec2_public" {
   ssh_key_name                = aws_key_pair.key_pair.key_name
   instance_type               = "t3.micro"
   associate_public_ip_address = true
-  instance_count              = (["1", "2"])
+  instance_count              = (["1"])
 }
